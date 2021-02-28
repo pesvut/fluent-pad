@@ -76,7 +76,7 @@ const App = () => {
                                 joinRoom();
                             }}
                         >
-                            <h1 className="form-caption">Welcome to FluentPad</h1>
+                            <h1 className="form-caption">Welcome to Maths 4 U</h1>
                             <input
                                 className="text-input"
                                 placeholder="Your name"
@@ -100,7 +100,7 @@ const App = () => {
 
                     {isInRoom && (
                         <div className="room-wrapper">
-                            <h1 className="fluent-pad">FluentPad</h1>
+                            <h1 className="fluent-pad">Maths 4 U</h1>
                             <UserList selfName={nickName} />
                             <CollaborativeEditor />
                         </div>

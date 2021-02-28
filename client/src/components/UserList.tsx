@@ -8,6 +8,7 @@ import {
 import { useFluenceClient } from '../app/FluenceClientContext';
 import * as api from 'src/app/api';
 import { PeerIdB58, subscribeToEvent } from '@fluencelabs/fluence';
+import { isNull } from 'lodash';
 
 interface User {
     id: PeerIdB58;
@@ -29,6 +30,7 @@ const refreshTimeoutMs = 120000;
 export const UserList = (props: { selfName: string }) => {
     const client = useFluenceClient()!;
     const [users, setUsers] = useState<Map<PeerIdB58, User>>(new Map());
+    const [url, setUrl] = useState('');
 
     useEffect(() => {
         const listRefreshTimer = setInterval(() => {
@@ -94,6 +96,7 @@ export const UserList = (props: { selfName: string }) => {
         // don't block
         api.getUserList(client);
         api.notifySelfAdded(client, props.selfName);
+        setUrl(window.location.href);
 
         return () => {
             clearTimeout(listRefreshTimer);
@@ -103,20 +106,33 @@ export const UserList = (props: { selfName: string }) => {
         };
     }, []);
 
+    const copyFromInput = () => {
+        var copyText = document.getElementById('myInput') as HTMLInputElement;
+        if (copyText != null) {
+            copyText.select();
+            copyText.setSelectionRange(0, 99999)
+            document.execCommand("copy")
+        }
+    };
+
     const usersArray = Array.from(users)
         .map((x) => x[1])
         .sort((a, b) => a.name.localeCompare(b.name));
 
     return (
-        <div className="userlist">
-            <ul>
-                {usersArray.map((x) => (
-                    <li key={x.id}>
-                        <span className={x.id === client.selfPeerId ? 'bold' : ''}>{x.name}</span>
-                        <span className={x.isOnline ? 'green' : 'red'}> ({x.isOnline ? 'online' : 'offline'})</span>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <>
+            <div className="userlist">
+                <ul>
+                    {usersArray.map((x) => (
+                        <li key={x.id}>
+                            <span className={x.id === client.selfPeerId ? 'bold' : ''}>{x.name}</span>
+                            <span className={x.isOnline ? 'green' : 'red'}> ({x.isOnline ? 'online' : 'offline'})</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <input type="text" value={url} id="myInput" />
+            <button style={{marginRight: "5px", marginLeft: "5px", background: "blue"}} onClick={() => copyFromInput}>Copy text</button>
+        </>
     );
 };

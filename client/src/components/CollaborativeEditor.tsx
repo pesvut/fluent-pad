@@ -39,7 +39,7 @@ export const CollaborativeEditor = () => {
     const [list, setList] = useState<DataItem[] | null>(null);
     const [text, setText] = useState<string | null>(null);
     const [syncClient, setSyncClient] = useState(new SyncClient());
-    const [height, setHeight] = useState(400);
+    const [height, setHeight] = useState(300);
     const [viewerRef, onChange] = useRealtimeViewer();
     const [dataURL, setDataURL] = useState('');
 
@@ -149,19 +149,18 @@ export const CollaborativeEditor = () => {
                     switch (item.type) {
                         case 'latex':
                             return (
-                                <EditableMathField
-                                    latex={item.text}
-                                    onChange={(mathField) => handleTextUpdate(mathField.latex(), index)}
-                                />
+                                <div style={{width: "99%", marginBottom: "10px", marginTop: "10px"}}>
+                                    <EditableMathField
+                                        latex={item.text}
+                                        onChange={(mathField) => handleTextUpdate(mathField.latex(), index)}
+                                    />
+                                </div>
                             );
                         case 'drawing':
                             return (
-                                <>
-                                    <DrawingBoard
-                                        height={height}
-                                        onChnge={(e) => handleImgUpdate(dataURL, index)}
-                                    />
-                                </>
+                                <div style={{border: "1px black solid", marginTop: "10px", marginBottom: "10px"}}>
+                                    <DrawingBoard height={height} onChnge={(e) => handleImgUpdate(dataURL, index)} />
+                                </div>
                             );
                         case 'doc':
                         default:
@@ -171,6 +170,7 @@ export const CollaborativeEditor = () => {
                                     className="code-editor"
                                     disabled={item.text === null}
                                     value={item.text ?? ''}
+                                    style={{width: "99.8%", marginTop: "10px", marginBottom: "10px", border: "1px black solid"}}
                                     onChange={(e) => handleTextUpdate(e.target.value, index)}
                                 />
                             );
