@@ -103,9 +103,19 @@ body {
     }
 }
 
+.mq-editable-field {
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem 6px;
+    font-size: 1.5rem;
+    border: none;
+    background-color: $bg-color1 !important;
+    color: $font-color1;
+}
+
 .code-editor {
     width: 100%;
-    min-height: 500px;
+    min-height: 5rem;
 
     resize: none;
     padding: 1em 0.5em 0.5em 0.5em;

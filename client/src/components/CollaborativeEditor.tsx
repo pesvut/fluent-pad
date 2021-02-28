@@ -2,10 +2,15 @@ import _, { update } from 'lodash';
 import { useEffect, useState } from 'react';
 import { PeerIdB58, subscribeToEvent } from '@fluencelabs/fluence';
 
+import { addStyles, EditableMathField } from 'react-mathquill'
+
 import { fluentPadServiceId, notifyTextUpdateFnName } from 'src/app/constants';
 import { useFluenceClient } from '../app/FluenceClientContext';
 import { getUpdatedDocFromText, initDoc, SyncClient } from '../app/sync';
 import * as api from 'src/app/api';
+
+// adds styles for react-mathquill
+addStyles()
 
 export interface DataItem {
     enabled: boolean;
@@ -113,8 +118,7 @@ export const CollaborativeEditor = () => {
         };
     }, []);
 
-    const handleTextUpdate = (e: React.ChangeEvent<HTMLTextAreaElement>, index: number) => {
-        const itemText = e.target.value;
+    const handleTextUpdate = (itemText: string, index: number) => {
         const newText = updateListIndex(itemText, index);
         broadcastUpdates(newText, syncClient);
     };
@@ -123,14 +127,20 @@ export const CollaborativeEditor = () => {
         <div>
             {list ? list.map((item, index) => {
                 switch(item.type) {
-                    case "doc": 
+                    case "latex": 
+                        return <EditableMathField
+                            latex={item.text}
+                            onChange={(mathField) => handleTextUpdate(mathField.latex(), index)}
+                        />
+
+                    case "doc":
                     default:
                         return <textarea
                             spellCheck={false}
                             className="code-editor"
                             disabled={item.text === null}
                             value={item.text ?? ''}
-                            onChange={(e) => handleTextUpdate(e, index)}
+                            onChange={(e) => handleTextUpdate(e.target.value, index)}
                         />
                 }
             }) : <p> Loading data... </p>}
