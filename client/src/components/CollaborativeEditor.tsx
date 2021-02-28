@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _, { update } from 'lodash';
 import { useEffect, useState } from 'react';
 import { PeerIdB58, subscribeToEvent } from '@fluencelabs/fluence';
 
@@ -6,6 +6,18 @@ import { fluentPadServiceId, notifyTextUpdateFnName } from 'src/app/constants';
 import { useFluenceClient } from '../app/FluenceClientContext';
 import { getUpdatedDocFromText, initDoc, SyncClient } from '../app/sync';
 import * as api from 'src/app/api';
+
+export interface DataItem {
+    enabled: boolean;
+    text: string;
+    type: string;
+}
+
+const DEFAULT_DATA_ITEM:DataItem = {
+    enabled: true,
+    text: "",
+    type: "doc"
+}
 
 const broadcastUpdates = _.debounce((text: string, syncClient: SyncClient) => {
     let doc = syncClient.getDoc();
@@ -17,12 +29,54 @@ const broadcastUpdates = _.debounce((text: string, syncClient: SyncClient) => {
 
 export const CollaborativeEditor = () => {
     const client = useFluenceClient()!;
+    const [list, setList] = useState<DataItem[] | null>(null);
     const [text, setText] = useState<string | null>(null);
     const [syncClient, setSyncClient] = useState(new SyncClient());
 
+    function updateListIndex(newItem: string | null, index: number) {
+        let newList;
+        if (list === null)
+            newList = null
+        else 
+            newList = [...list];
+        
+        newList[index].text = newItem;
+
+        return updateList(newList)
+    }
+
+    function appendToList(newItemType:string) {
+        let newList;
+        if (list === null)
+            return null
+        else 
+            newList = [...list];
+        
+        newList.push({...DEFAULT_DATA_ITEM, type: newItemType})
+
+        return updateList(newList)
+    }
+
+    function updateList(newList: DataItem[]) {
+        setList( newList );
+        const newText = JSON.stringify(newList);
+        setText( newText );
+        return newText;
+    }
+
+    function parseToList(newText: string):void {
+        if (!newText)
+            newText = JSON.stringify([DEFAULT_DATA_ITEM]);
+
+        setText( newText );
+        console.log( newText )
+        const newList = JSON.parse(newText) 
+        setList( newList );
+    }
+
     useEffect(() => {
         syncClient.handleDocUpdate = (doc) => {
-            setText(doc.text.toString());
+            parseToList(doc.text.toString());
         };
 
         syncClient.handleSendChanges = (changes: string) => {
@@ -59,19 +113,31 @@ export const CollaborativeEditor = () => {
         };
     }, []);
 
-    const handleTextUpdate = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const newText = e.target.value;
-        setText(newText);
+    const handleTextUpdate = (e: React.ChangeEvent<HTMLTextAreaElement>, index: number) => {
+        const itemText = e.target.value;
+        const newText = updateListIndex(itemText, index);
         broadcastUpdates(newText, syncClient);
     };
 
     return (
-        <textarea
-            spellCheck={false}
-            className="code-editor"
-            disabled={text === null}
-            value={text ?? ''}
-            onChange={handleTextUpdate}
-        />
+        <div>
+            {list ? list.map((item, index) => {
+                switch(item.type) {
+                    case "doc": 
+                    default:
+                        return <textarea
+                            spellCheck={false}
+                            className="code-editor"
+                            disabled={item.text === null}
+                            value={item.text ?? ''}
+                            onChange={(e) => handleTextUpdate(e, index)}
+                        />
+                }
+            }) : <p> Loading data... </p>}
+        
+        <button onClick={()=>appendToList("doc")}>Add Item</button>
+        
+        </div>
+        
     );
 };
