@@ -194,7 +194,7 @@ export const CollaborativeEditor = () => {
                     switch (item.type) {
                         case 'latex':
                             return (
-                                <div>
+                                <div style={{width: "98.7%", marginBottom: "10px", marginTop: "10px"}}>
                                     <EditableMathField
                                         latex={item.text}
                                         onChange={(mathField) => handleTextUpdate(mathField.latex(), index)}
@@ -206,7 +206,7 @@ export const CollaborativeEditor = () => {
                             );
                         case 'drawing':
                             return (
-                                <div style={{ border: '1px black solid', marginTop: '10px', marginBottom: '10px' }}>
+                                <div style={{border: "1px black solid", marginTop: "10px", marginBottom: "10px"}}>
                                     <DrawingBoard height={height} onChnge={(e) => handleImgUpdate(dataURL, index)} />
                                 </div>
                             );
@@ -218,12 +218,7 @@ export const CollaborativeEditor = () => {
                                     className="code-editor"
                                     disabled={item.text === null}
                                     value={item.text ?? ''}
-                                    style={{
-                                        width: '99.8%',
-                                        marginTop: '10px',
-                                        marginBottom: '10px',
-                                        border: '1px black solid',
-                                    }}
+                                    style={{width: "98.6%", marginTop: "10px", marginBottom: "10px", border: "1px black solid"}}
                                     onChange={(e) => handleTextUpdate(e.target.value, index)}
                                 />
                             );
