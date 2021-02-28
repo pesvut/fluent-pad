@@ -6,7 +6,7 @@ $color-disabled: lightgray;
 $color1: black;
 $color2: rgb(214, 214, 214);
 
-$accent-color: rgb(38, 95, 230);
+$accent-color: rgb(225, 30, 90);
 
 $header-height: 60px;
 $border-radius: 10px;
@@ -52,7 +52,7 @@ body {
 }
 
 .content {
-    width: 1000px;
+    width: 1200px;
     margin-left: auto;
     margin-right: auto;
 
@@ -93,25 +93,41 @@ body {
 }
 
 .userlist {
-    width: 100%;
+    width:100%;
     overflow: scroll;
     white-space: nowrap;
     margin-top: 10px;
-    height: 40px;
+    height: 30px;
     scrollbar-width: none;
 
     & li {
-        display: inline;
+        display: inline-block;
         margin-right: 10px;
         @include font(14px);
     }
 }
 
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.mq-editable-field {
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem 6px;
+    font-size: 1.5rem;
+    border: none;
+    background-color: $bg-color1 !important;
+    color: $font-color1;
+}
+
 .code-editor {
-    width: 98%;
+    width: 100%;
     min-height: 5rem;
 
     resize: none;
+    padding: 1em 0.5em 0.5em 0.5em;
 
     box-shadow: $shadow;
 
@@ -133,7 +149,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-
+    
     button {
         margin: 0.5rem;
         padding: 0.5rem;
@@ -252,9 +268,4 @@ body {
 
 .bold {
     font-weight: bold;
-}
-
-.drawing-board {
-    border-color: $accent-color;
-    border-width: 2px;
 }
