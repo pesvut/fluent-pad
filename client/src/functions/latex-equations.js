@@ -141,7 +141,7 @@ Calc.prototype.eval = function(x) {
       var numArgs = token[0];
       var args = [];
       do {
-        args.unshift(stack.pop());
+        args.unshift(Number(stack.pop()) );
       } while (args.length < numArgs);
 
       switch (token[1]) {
@@ -247,3 +247,5 @@ Calc.prototype.latexToInfix = function(latex) {
 
   return infix;
 };
+
+export default Calc;
