@@ -53,13 +53,13 @@ export const DrawingBoard: React.FC<Props> = ({ onChnge, height }) => {
                 </ul>
                 <ul>
                     <li onClick={() => setStrokeWidth(4)} style={{ float: 'left', marginRight: '10px' }}>
-                        4
+                        <div style={{ width: '5px', height: '5px', background: 'black', borderRadius: '50%', marginTop: '6px' }} />
                     </li>
                     <li onClick={() => setStrokeWidth(10)} style={{ float: 'left', marginRight: '10px' }}>
-                        10
+                        <div style={{ width: '10px', height: '10px', background: 'black', borderRadius: '50%', marginTop: '3px' }} />
                     </li>
                     <li onClick={() => setStrokeWidth(16)} style={{ float: 'left', marginRight: '20px' }}>
-                        16
+                        <div style={{ width: '15px', height: '15px', background: 'black', borderRadius: '50%', marginTop: '0px' }} />
                     </li>
                 </ul>
             </div>
