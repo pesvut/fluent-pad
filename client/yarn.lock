@@ -7772,13 +7772,6 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-literallycanvas@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/literallycanvas/-/literallycanvas-0.5.2.tgz#7d4800a8d9c4b38a593e91695d52466689586abd"
-  integrity sha512-SPxZ0DfzUWOXBPnsFD/Y1OulGKpv33IKGB+DCoUkNKQsc38kRDy1mGjbWbs/JAAyIGM1C9Y0CYI23SQmtXR5aw==
-  dependencies:
-    react-addons-pure-render-mixin "^15.1"
-
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"
@@ -10351,13 +10344,6 @@ raw-body@2.4.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-react-addons-pure-render-mixin@^15.1:
-  version "15.6.3"
-  resolved "https://registry.yarnpkg.com/react-addons-pure-render-mixin/-/react-addons-pure-render-mixin-15.6.3.tgz#5dc73af0fa32186dbc4887f20667b46d3f9caed7"
-  integrity sha512-e7F2OsLiyYGr9SHWHGlI/FfHRh+kbYx0hNfdN5zivHIf4vzeno7gsRJKXg71E35CpUCnre+JfM6UgWWgsvJBzA==
-  dependencies:
-    object-assign "^4.1.0"
-
 react-app-polyfill@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-app-polyfill/-/react-app-polyfill-2.0.0.tgz#a0bea50f078b8a082970a9d853dc34b6dcc6a3cf"
@@ -10428,6 +10414,11 @@ react-mathquill@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-mathquill/-/react-mathquill-1.0.1.tgz#3fed290d43a796d4eeac0d6f8cc7f4912689a7eb"
   integrity sha512-r49RWfHPSyEgGDHdq6khOO5MWtqFhDxtrhGNdHxmuwgpx+pB9+NiIF+QolvIyea0FMkVmyzsC6R3jjK8oK6skQ==
+
+react-realtime-drawing@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/react-realtime-drawing/-/react-realtime-drawing-0.1.3.tgz#c3929b624795dcd96f51871d46f77c1016f6a8bc"
+  integrity sha512-ytJcyB5+LCJ3o4vqK8GvFpq9v74AAsbJ86ZjaPLer+NbVCwmvnO+P237Nx3MPPMCtKqBB+vJ6UFRAKuBFGKD3Q==
 
 react-refresh@^0.8.3:
   version "0.8.3"

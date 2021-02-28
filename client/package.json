@@ -14,12 +14,12 @@
     "@types/react-dom": "^16.9.10",
     "automerge": "^0.14.2",
     "diff-match-patch": "^1.0.5",
-    "literallycanvas": "^0.5.2",
     "lodash": "^4.17.20",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-mathquill": "^1.0.1",
+    "react-realtime-drawing": "^0.1.3",
     "react-scripts": "4.0.1",
     "typescript": "^4.1.3",
     "web-vitals": "^0.2.4"
