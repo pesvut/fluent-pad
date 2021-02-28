@@ -7,21 +7,50 @@ import { UserList } from './UserList';
 import * as api from 'src/app/api';
 import { CollaborativeEditor } from './CollaborativeEditor';
 import { relayNode } from 'src/app/constants';
-import { DrawingBoard } from './DrawingBoard'
+import * as PeerId from 'peer-id';
+import { useLocaleState , useLocaleState1 } from '../functions/hooks';
 
 const App = () => {
+    const [peerIdHex, setPeerIdHex] = useLocaleState("peerIdHex");
     const [client, setClient] = useState<FluenceClient | null>(null);
     const [isInRoom, setIsInRoom] = useState<boolean>(false);
-    const [nickName, setNickName] = useState('');
+    const [nickName, setNickName] = useLocaleState1("nickName");
 
-    useEffect(() => {
-        createClient(relayNode)
-            .then((client) => setClient(client))
-            .catch((err) => console.log('Client initialization failed', err));
-    }, []);
+    const initClient = (peerid: PeerId | undefined) => {
+        createClient(relayNode, undefined || peerid ) 
+            .then((client) => {
+                setClient(client) 
+            })
+            .catch((err) => {
+                console.log('Client initialization failed', err)
+            }); 
+    }
+
+    useEffect(() => {(async () => {
+        let peerIdInstance : PeerId | undefined;
+        
+        try {
+
+            if (peerIdHex)
+                peerIdInstance = PeerId.createFromHexString(peerIdHex);
+            else {
+                peerIdInstance = await PeerId.create();
+                setPeerIdHex( peerIdInstance.toHexString() )
+            }
+
+        } catch(err) {
+            console.log("Error initialising PeerID: ", err)
+        }
+    
+        initClient(peerIdInstance)
+
+    })()}, [peerIdHex, setPeerIdHex]);
 
     const joinRoom = async () => {
         if (!client) {
+            return;
+        }
+        if (!nickName) {
             return;
         }
 
@@ -92,7 +121,6 @@ const App = () => {
                             <h1 className="fluent-pad">FluentPad</h1>
                             <UserList selfName={nickName} />
                             <CollaborativeEditor />
-                            <DrawingBoard />
                         </div>
                     )}
                 </div>
