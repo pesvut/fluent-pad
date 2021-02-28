@@ -132,7 +132,7 @@ export const UserList = (props: { selfName: string }) => {
                 </ul>
             </div>
             <input type="text" value={url} id="myInput" />
-            <button style={{marginRight: "5px", marginLeft: "5px", background: "blue"}} onClick={() => copyFromInput}>Copy text</button>
+            <button style={{marginRight: "5px", marginLeft: "5px", background: "white", color: "blue", borderRadius: "25%"}} onClick={() => copyFromInput()}>Copy text</button>
         </>
     );
 };
