@@ -13,9 +13,20 @@ A user is allowed to:
 
 Our application is powered by a Fluence Network backend, using a React front-end and TypeScript as a powerful, syntactical programming language.
 
-Programmers on the team:
+Being that our application is extremely extensible, we plan on including:
+
+* Cryptocurrency Tipping
+* Mentorship
+* A means of vocalizing the thoughts of mathematicians through an audio feed
+* Adding shapes and various utensils to our drawing board.
+
+**Programmers on the team:**
 
 * Nicky Pockinkov - Third year theoretical Physics Student at Trinity College, Dublin
 * Sabrina Reyes - Third year Computer Science student at City College of New York
+
+We'd like to thank FluenceLabs for being being the open-source, public, blockchain-based decentralized database platform we needed to build our components and allow for easy data integration.
+
+We would also like to thank HoloChain for advising us as we were juggling great ideas in the midst of an approximately 30 hour sprint.
 
 **Demo:** https://math.nicky.pro/
