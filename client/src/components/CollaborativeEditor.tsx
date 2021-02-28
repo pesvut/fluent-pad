@@ -194,12 +194,12 @@ export const CollaborativeEditor = () => {
                     switch (item.type) {
                         case 'latex':
                             return (
-                                <div style={{width: "98.7%", marginBottom: "10px", marginTop: "10px"}}>
+                                <div style={{width: "98.7%", marginBottom: "10px", marginTop: "10px", position: "relative"}}>
                                     <EditableMathField
                                         latex={item.text}
                                         onChange={(mathField) => handleTextUpdate(mathField.latex(), index)}
                                     />
-                                    <button onClick={() => toggleGraph(index)}>Graph</button>
+                                    <button className="graph-button" onClick={() => toggleGraph(index)}> Toggle Graph </button>
                                     <br/>
                                     {item.graph?.enabled && <PlotLatex data={graphData[index]} />}
                                 </div>

@@ -199,6 +199,38 @@ body {
     margin-bottom: 20px;
 }
 
+.graph-button {
+    position: absolute;
+    right: -0.5rem;
+    top: 0.3rem;
+    background-color: rgba(royalblue, 0.3);
+    border: none;
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.2rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(royalblue, 0.5);
+    }
+}
+
+.graph-block {
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    position: relative;
+    border: 1px solid rgba(black, 0.3);
+    margin-top: 0.5rem;
+    padding: 0.4rem;
+
+    .points-plotted {
+        position: absolute;
+        top: 0.5rem;
+        left: 0.5rem;
+        z-index: 1;
+    }
+}
+
 .join-button {
     background-color: white;
     color: $accent-color;

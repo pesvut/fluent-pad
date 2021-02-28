@@ -2,7 +2,7 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 import Calc from '../functions/latex-equations'
 
-const NUM_POINTS = 21;
+const NUM_POINTS = 101;
 
 function PlotLatex({data, onChange=()=>{}}) {
     const latex = data.text
@@ -22,22 +22,19 @@ function PlotLatex({data, onChange=()=>{}}) {
         try {
             y = compute.eval(x);
 
-        } catch(err) {
-            xs.push(x);
-            ys.push(0);
-        } 
+        } catch(err) {} 
 
         if (!isNaN(y)) {
             xs.push(x);
             ys.push(y);
-        } else {
-            xs.push(x);
-            ys.push(0);
         }
     } 
   
   
     return (
+        <div className="graph-block">
+        <h2 className="points-plotted">Points plotted: {xs.length}</h2>
+
       <Plot
         data={[
           {
@@ -49,8 +46,10 @@ function PlotLatex({data, onChange=()=>{}}) {
             marker: {color: 'purple'},
           },
         ]}
-        layout={ {width: "20rem", height: "15rem", title: 'A Fancy Plot'} }
+        layout={ {width: "20rem", height: "14rem", title: compute.latexToInfix(latex)} }
       />
+
+        </div>
     );
 }
 
