@@ -29,7 +29,7 @@ const AppRouter = () => {
                                     window.open('/api/new-room');
                                 }}
                             >
-                                <h1 className="form-caption">Welcome to Maths 4 U</h1>
+                                <h1 className="form-caption">Welcome to MaTeX</h1>
                                 <br></br>
                                 <p style={{ marginTop: '10px', marginBottom: '10px', textAlign: "center" }}>
                                     Get started in building an epic knowledge in mathematics.
