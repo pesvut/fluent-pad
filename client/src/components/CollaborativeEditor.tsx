@@ -135,7 +135,11 @@ export const CollaborativeEditor = () => {
                 }
             }) : <p> Loading data... </p>}
         
-        <button onClick={()=>appendToList("doc")}>Add Item</button>
+        <div className="add-code-section-buttons">
+            <button className="add-code-section" onClick={()=>appendToList("doc")}> &#x1F4DD; </button>
+            <button className="add-code-section" onClick={()=>appendToList("latex")} style={{"fontSize": "0.8em"}}> 1+1 </button>
+            
+        </div>
         
         </div>
         

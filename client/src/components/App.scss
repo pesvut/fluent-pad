@@ -126,6 +126,21 @@ body {
     }
 }
 
+.add-code-section-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    button {
+        margin: 0.5rem;
+        padding: 0.5rem;
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.5rem;
+        border-radius: 50%;
+    }
+}
+
 .text-input {
     width: 100%;
     height: 40px;
