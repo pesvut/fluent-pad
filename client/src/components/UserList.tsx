@@ -25,7 +25,7 @@ const turnUserAsOfflineCandidate = (u: User): User => {
     };
 };
 
-const refreshTimeoutMs = 30000;
+const refreshTimeoutMs = 120000;
 
 export const UserList = (props: { selfName: string }) => {
     const client = useFluenceClient()!;

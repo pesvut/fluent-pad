@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { PeerIdB58, subscribeToEvent } from '@fluencelabs/fluence';
 
 import { addStyles, EditableMathField } from 'react-mathquill';
+import PlotLatex from '../components/PlotLatex'
 
 import { fluentPadServiceId, notifyTextUpdateFnName } from 'src/app/constants';
 import { useFluenceClient } from '../app/FluenceClientContext';
@@ -14,16 +15,26 @@ import { useRealtimeDrawer, useRealtimeViewer } from 'react-realtime-drawing';
 // adds styles for react-mathquill
 addStyles();
 
+export interface GraphData {
+    enabled: boolean;
+}
+
+interface GraphDataPlus extends GraphData {
+    text: string;
+}
+
 export interface DataItem {
     enabled: boolean;
     text: string;
     type: string;
+    graph: GraphData | undefined;
 }
 
 const DEFAULT_DATA_ITEM: DataItem = {
     enabled: true,
     text: '',
     type: 'doc',
+    graph: undefined,
 };
 
 const broadcastUpdates = _.debounce((text: string, syncClient: SyncClient) => {
@@ -42,11 +53,29 @@ export const CollaborativeEditor = () => {
     const [height, setHeight] = useState(300);
     const [viewerRef, onChange] = useRealtimeViewer();
     const [dataURL, setDataURL] = useState('');
+    const [graphData, setGraphData] = useState({});
 
     const [drawerRef] = useRealtimeDrawer({
         color: 'black',
         onChange,
     });
+
+    useEffect(()=>{
+        let didChange = false;
+        const newGraphData = graphData;
+
+        list?.map((item,i) => {
+            if (!newGraphData[i] || newGraphData[i].text != item.text || newGraphData[i] != item.graph?.enabled)
+                newGraphData[i] = {
+                    text: item.text,
+                    ...item.graph
+                }
+        })
+
+        if (didChange) 
+            setGraphData( newGraphData )
+
+    },[list])
 
     function updateListIndex(newItem: string | null, index: number) {
         let newList;
@@ -67,6 +96,10 @@ export const CollaborativeEditor = () => {
         }
 
         newList.push({ ...DEFAULT_DATA_ITEM, type: newItemType });
+
+        if (newItemType == 'latex') {
+            newList[ newList.length-1 ].graph = {enabled: false} 
+        }
 
         return updateList(newList);
     }
@@ -142,6 +175,18 @@ export const CollaborativeEditor = () => {
         broadcastUpdates(newImg, syncClient);
     };
 
+    const toggleGraph = (index: number) => {
+        if (list===null) return
+        
+        const newList = [...list]
+        if (newList[index].graph == undefined) return
+        //@ts-ignore
+        newList[index].graph.enabled = !(newList[index].graph?.enabled)
+        
+        updateList(newList)
+        broadcastUpdates(JSON.stringify(newList), syncClient)
+    }
+
     return (
         <div>
             {list ? (
@@ -154,6 +199,9 @@ export const CollaborativeEditor = () => {
                                         latex={item.text}
                                         onChange={(mathField) => handleTextUpdate(mathField.latex(), index)}
                                     />
+                                    <button onClick={() => toggleGraph(index)}>Graph</button>
+                                    <br/>
+                                    {item.graph?.enabled && <PlotLatex data={graphData[index]} />}
                                 </div>
                             );
                         case 'drawing':
