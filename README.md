@@ -11,4 +11,11 @@ A user is allowed to:
 * Write mathematical equations that can be graphed and further analyzed
 * Draw graphs that can help explain ideas using diagrams
 
+Our application is powered by a Fluence Network backend, using a React front-end and TypeScript as a powerful, syntactical programming language.
+
+Programmers on the team:
+
+* Nicky Pockinkov - Third year theoretical Physics Student at Trinity College, Dublin
+* Sabrina Reyes - Third year Computer Science student at City College of New York
+
 **Demo:** https://math.nicky.pro/
