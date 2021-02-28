@@ -3,14 +3,16 @@ import { FluenceClient, Particle, sendParticle, sendParticleAsFetch } from '@flu
 import {
     fluentPadServiceId,
     historyNodePeerId,
-    historyServiceId,
     notifyOnlineFnName,
     notifyTextUpdateFnName,
     notifyUserAddedFnName,
     notifyUserRemovedFnName,
-    userListNodePeerId,
-    userListServiceId,
+    userListNodePeerId
 } from './constants';
+
+import { getQueryStringVal } from '../functions/query'
+const historyServiceId = getQueryStringVal("history")
+const userListServiceId = getQueryStringVal("userlist")
 
 export interface ServiceResult {
     ret_code: number;
