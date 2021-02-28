@@ -92,7 +92,6 @@ const App = () => {
                             <h1 className="fluent-pad">FluentPad</h1>
                             <UserList selfName={nickName} />
                             <CollaborativeEditor />
-                            <DrawingBoard />
                         </div>
                     )}
                 </div>
