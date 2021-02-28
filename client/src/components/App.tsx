@@ -7,6 +7,7 @@ import { UserList } from './UserList';
 import * as api from 'src/app/api';
 import { CollaborativeEditor } from './CollaborativeEditor';
 import { relayNode } from 'src/app/constants';
+import { DrawingBoard } from './DrawingBoard'
 
 const App = () => {
     const [client, setClient] = useState<FluenceClient | null>(null);
@@ -91,6 +92,7 @@ const App = () => {
                             <h1 className="fluent-pad">FluentPad</h1>
                             <UserList selfName={nickName} />
                             <CollaborativeEditor />
+                            <DrawingBoard />
                         </div>
                     )}
                 </div>
