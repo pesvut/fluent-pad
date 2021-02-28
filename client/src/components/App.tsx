@@ -7,44 +7,26 @@ import { UserList } from './UserList';
 import * as api from 'src/app/api';
 import { CollaborativeEditor } from './CollaborativeEditor';
 import { relayNode } from 'src/app/constants';
-import * as PeerId from 'peer-id';
-import { useLocaleState , useLocaleState1 } from '../functions/hooks';
+import { useLocaleState1 } from '../functions/hooks';
 
 const App = () => {
-    const [peerIdHex, setPeerIdHex] = useLocaleState("peerIdHex");
     const [client, setClient] = useState<FluenceClient | null>(null);
     const [isInRoom, setIsInRoom] = useState<boolean>(false);
     const [nickName, setNickName] = useLocaleState1("nickName");
 
-    const initClient = (peerid: PeerId | undefined) => {
-        createClient(relayNode, undefined || peerid ) 
+    const initClient = () => {
+        createClient(relayNode) 
             .then((client) => {
                 setClient(client) 
             })
             .catch((err) => {
-                console.log('Client initialization failed', err)
+                console.log('Client initialization failed: ', err)
             }); 
     }
 
     useEffect(() => {(async () => {
-        let peerIdInstance : PeerId | undefined;
-        
-        try {
-
-            if (peerIdHex)
-                peerIdInstance = PeerId.createFromHexString(peerIdHex);
-            else {
-                peerIdInstance = await PeerId.create();
-                setPeerIdHex( peerIdInstance.toHexString() )
-            }
-
-        } catch(err) {
-            console.log("Error initialising PeerID: ", err)
-        }
-    
-        initClient(peerIdInstance)
-
-    })()}, [peerIdHex, setPeerIdHex]);
+        initClient()
+    })()}, []);
 
     const joinRoom = async () => {
         if (!client) {
