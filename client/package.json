@@ -14,6 +14,7 @@
     "@types/react-dom": "^16.9.10",
     "automerge": "^0.14.2",
     "diff-match-patch": "^1.0.5",
+    "literallycanvas": "^0.5.2",
     "lodash": "^4.17.20",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
