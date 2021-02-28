@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import './App.scss';
 import { useRealtimeDrawer, useRealtimeViewer } from 'react-realtime-drawing';
 
 interface Props {
@@ -7,19 +8,23 @@ interface Props {
 }
 
 export const DrawingBoard: React.FC<Props> = ({ onChnge, height }) => {
-  const [viewerRef, onChange] = useRealtimeViewer();
-  const [pointsArray, setPointsArray] = React.useState(null);
+    const [viewerRef, onChange] = useRealtimeViewer();
+    const [pointsArray, setPointsArray] = React.useState(null);
 
-  const [drawerRef] = useRealtimeDrawer({
-    color: 'black',
-    onChange
-  });
+    const [drawerRef] = useRealtimeDrawer({
+        color: 'black',
+        onChange,
+    });
 
-  return (
-    <div>
-      <div style={{ width: "100%", height: height, borderBottom: "5px solid red", }}>
-        <canvas ref={drawerRef} style={{ backgroundColor: "white", border: "black"}} onChange={onChnge}/>
-      </div>
-    </div>
-  );
-}
+    return (
+        <div
+            style={{
+                width: '100%',
+                height: height,
+            }}
+            className="drawing-board"
+        >
+            <canvas ref={drawerRef} style={{ backgroundColor: 'white' }} onChange={onChnge} />
+        </div>
+    );
+};
