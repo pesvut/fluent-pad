@@ -1,6 +1,8 @@
 # MaTeX
 
-In this era, students whose curriculum involves mathematics are missing an essential tool for them to interact with tutors, teachers, and one another online. Though this has been shown to be difficult to adapt to, we believe this may open doors to things not possible in the past.
+Consider this. In this era, students whose curriculum involves mathematics are missing an essential tool for them to interact with tutors, teachers, and one other online. While this has shown to be difficult to adapt to, we believe that this may have opened doors to things that may not have been possible in the past.
+
+We are introducing MaTeX, a web application which drives the collaboration of algebraic and geometric tools with mathematicians worldwide.
 
 A user is allowed to:
 
@@ -13,7 +15,7 @@ A user is allowed to:
 
 Our application is powered by a Fluence Network backend, using a React front-end and TypeScript as a powerful, syntactical programming language.
 
-Being that our application is extremely extensible, we plan on including:
+**Being that our application is extremely extensible, we plan on including:**
 
 * Cryptocurrency Tipping
 * Mentorship
