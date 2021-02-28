@@ -93,14 +93,23 @@ body {
 }
 
 .userlist {
+    width:100%;
+    overflow: scroll;
+    white-space: nowrap;
     margin-top: 10px;
     height: 30px;
+    scrollbar-width: none;
 
     & li {
-        display: inline;
+        display: inline-block;
         margin-right: 10px;
         @include font(14px);
     }
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
 }
 
 .mq-editable-field {
@@ -259,31 +268,4 @@ body {
 
 .bold {
     font-weight: bold;
-}
-
-.lc-drawing.with-gui {
-
-    canvas:nth-child(1){
-      display: none;
-      height: 0;
-    }
-  
-}
-
-.lc-drawing.with-gui {
-
-  canvas:nth-child(2){
-    height: 400px;
-    width: 500px;
-  }
-
-}
-
-.lc-options.with-gui {
-
-  canvas:nth-child(2){
-    height: 400px;
-    width: 500px;
-  }
-
 }

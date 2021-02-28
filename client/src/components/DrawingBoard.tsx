@@ -1,29 +1,25 @@
-import LC from "literallycanvas";
-import "./literallycanvas.css";
-import LiterallyCanvas from "literallycanvas/lib/js/core/LiterallyCanvas";
-import defaultOptions from "literallycanvas/lib/js/core/defaultOptions";
-import "./App.scss";
-import { useState } from "react";
+import React, { useRef } from 'react';
+import { useRealtimeDrawer, useRealtimeViewer } from 'react-realtime-drawing';
 
 interface Props {
-  width?: number;
-  height?: number;
+    height: number;
+    onChnge?: (e: any) => void;
 }
 
-export const DrawingBoard: React.FC<Props> = ({}) => {
-  const [hidden, setHidden] = useState(false);
+export const DrawingBoard: React.FC<Props> = ({ onChnge, height }) => {
+  const [viewerRef, onChange] = useRealtimeViewer();
+  const [pointsArray, setPointsArray] = React.useState(null);
 
-  defaultOptions.backgroundColor = "white";
-  defaultOptions.toolbarPosition = hidden ? "hidden" : "top";
-  defaultOptions.imageUrlPrefix = "/lib/img";
-
-  const lc = new LiterallyCanvas(defaultOptions);
+  const [drawerRef] = useRealtimeDrawer({
+    color: 'black',
+    onChange
+  });
 
   return (
-    <>
-      <div style={{ position: "relative" }}>
-        <LC.LiterallyCanvasReactComponent lc={lc} />
+    <div>
+      <div style={{ width: "100%", height: height, borderBottom: "5px solid red", }}>
+        <canvas ref={drawerRef} style={{ backgroundColor: "white", border: "black"}} onChange={onChnge}/>
       </div>
-    </>
+    </div>
   );
-};
+}
