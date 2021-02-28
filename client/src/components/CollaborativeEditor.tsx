@@ -149,16 +149,14 @@ export const CollaborativeEditor = () => {
                     switch (item.type) {
                         case 'latex':
                             return (
-                                <div style={{width: "99%", marginBottom: "10px", marginTop: "10px"}}>
-                                    <EditableMathField
-                                        latex={item.text}
-                                        onChange={(mathField) => handleTextUpdate(mathField.latex(), index)}
-                                    />
-                                </div>
+                                <EditableMathField
+                                    latex={item.text}
+                                    onChange={(mathField) => handleTextUpdate(mathField.latex(), index)}
+                                />
                             );
                         case 'drawing':
                             return (
-                                <div style={{border: "1px black solid", marginTop: "10px", marginBottom: "10px"}}>
+                                <div style={{ border: '1px black solid', marginTop: '10px', marginBottom: '10px' }}>
                                     <DrawingBoard height={height} onChnge={(e) => handleImgUpdate(dataURL, index)} />
                                 </div>
                             );
@@ -170,7 +168,12 @@ export const CollaborativeEditor = () => {
                                     className="code-editor"
                                     disabled={item.text === null}
                                     value={item.text ?? ''}
-                                    style={{width: "99.8%", marginTop: "10px", marginBottom: "10px", border: "1px black solid"}}
+                                    style={{
+                                        width: '99.8%',
+                                        marginTop: '10px',
+                                        marginBottom: '10px',
+                                        border: '1px black solid',
+                                    }}
                                     onChange={(e) => handleTextUpdate(e.target.value, index)}
                                 />
                             );
