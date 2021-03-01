@@ -8,7 +8,6 @@ import {
 import { useFluenceClient } from '../app/FluenceClientContext';
 import * as api from 'src/app/api';
 import { PeerIdB58, subscribeToEvent } from '@fluencelabs/fluence';
-import { isNull } from 'lodash';
 
 interface User {
     id: PeerIdB58;
